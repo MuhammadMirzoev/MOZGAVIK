@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Остановка транспорта — обучающая игра</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f1117;
+      --panel: rgba(20, 20, 25, 0.9);
+      --panel2: rgba(40, 40, 60, 0.9);
+      --text: #e8e8f0;
+      --accent: #4bd38a;
+      --danger: #e24a4a;
+      --warning: #f2d400;
+      --grid: rgba(255, 255, 255, 0.15);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #111;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* 1:1 квадратный формат экрана игры */
+    #gameWrap {
+      width: 720px;
+      height: 720px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 0 6px rgba(0,0,0,0.5);
+      background: #1a1f2a;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    /* верхняя панель с заголовком (не обязательно, но красиво) */
+    #titleBar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: linear-gradient(#1e2230, #151a28);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    #titleBar .left, #titleBar .right { display: flex; align-items: center; gap: 8px; }
+    #titleBar .badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(75, 211, 138, 0.2);
+      border: 1px solid rgba(75,211,138,0.6);
+      font-size: 12px;
+      color: #bfe6d0;
+    }
+
+    /* контент: канвас + боковая панель подсказок/счетов */
+    #stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      height: 100%;
+      width: 100%;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: linear-gradient(#2b2f3a 0%, #1a1e2a 100%);
+      image-rendering: crisp-edges;
+    }
+
+    /* правая панелька: управление и подсказки */
+    #uiPanel {
+      padding: 12px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 10px;
+      background: rgba(15, 17, 26, 0.98);
+      border-left: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .panelSection { background: var(--panel); border-radius: 10px; padding: 10px; border: 1px solid rgba(255,255,255,0.08); }
+
+    #scoreRow {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 18px;
+    }
+    #scoreValue { font-weight: bold; font-variant-numeric: tabular-nums; }
+
+    .btn {
+      padding: 10px 14px; border-radius: 8px;
+      border: none; cursor: pointer;
+      font-weight: bold;
+      color: #0b0b0f;
+      background: linear-gradient(#6ee7a3, #4bd38a);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+    }
+    .btn.secondary {
+      background: linear-gradient(#9aa4f5, #7a83f0);
+      color: #0b0b0f;
+    }
+    .btn.danger {
+      background: linear-gradient(#f26a6a, #e04343);
+    }
+    .btn:active { transform: translateY(1px); }
+
+    #hintBox {
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    #hintBox p { margin: 6px 0; line-height: 1.25; font-size: 14px; }
+    #hintBox .quote { color: #d6e0ff; font-style: italic; }
+
+    /* модальные окна: конец игры и видео */
+    .modal {
+      position: fixed; left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+    .modalContent {
+      width: 520px; max-width: 92vw;
+      background: var(--panel2);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    #endModal h2 { margin: 0 0 8px; }
+    #endModal .finalScore { font-size: 28px; font-weight: bold; margin: 8px 0 12px; }
+    #videoModal iframe { width: 100%; height: 315px; border: none; border-radius: 8px; }
+
+    /* декоратив сетка на поле дороги */
+    .roadGrid {
+      position: absolute;
+      left: 0; top: 0; width: 100%; height: 100%;
+      background-image: linear-gradient(to right, transparent 0 79px, rgba(255,255,255,0.04) 79px 80px),
+                        linear-gradient(to bottom, transparent 0 100%);
+      background-size: 80px 40px;
+      pointer-events: none;
+    }
+    /* маленькие индикаторы постов иSIGNs */
+    .postSign {
+      width: 18px; height: 60px;
+      background: #d62; border-radius: 3px;
+      position: absolute; left: 0; transform: translate(-50%, 0);
+    }
+
+    /* responsive tiny adjustments if needed later */
+    @media (max-width: 860px) {
+      #gameWrap { width: 90vw; height: 90vw; max-width: 720px; max-height: 720px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="gameWrap" aria-label="Интерактивная игра об остановке транспортных средств">
+  <div id="titleBar">
+    <div class="left">
+      <span>Право останова транспорта</span>
+      <span class="badge">1:1 экран</span>
+    </div>
+    <div class="right">
+      <span class="badge" id="hintCount">Подсказки: 4</span>
+    </div>
+  </div>
+
+  <div id="stage" aria-label="Игровая сцена">
+    <canvas id="gameCanvas" width="720" height="720"></canvas>
+    <div id="roadOverlay" class="roadGrid" aria-hidden="true"></div>
+
+    <div id="uiPanel" style="width:320px; display: none;">
+      <!-- панель будет видна на правой стороне (установлено двумя столбцами) -->
+    </div>
+  </div>
+
+  <!-- То что будет правее с подсказками и кнопками -->
+  <div id="uiPanel" class="panelSection" aria-label="Панель управления и подсказок">
+    <div id="scoreRow" style="justify-content: space-between; display:flex;">
+      <span>Счет:</span>
+      <span id="scoreValue">0</span>
+    </div>
+
+    <div style="display:flex; gap:8px; flex-wrap: wrap; justify-content: space-between;">
+      <button id="btnStop" class="btn" title="Стимулирует остановить транспорт на постах">Стоп</button>
+      <button id="btnPause" class="btn secondary" title="Пауза в игре">Пауза</button>
+      <button id="btnExit" class="btn danger" title="Выйти в меню">Выход</button>
+    </div>
+
+    <div class="panelSection" id="hintPanel" style="margin-top:8px; height: 260px;">
+      <div style="font-weight:bold; margin-bottom:6px;">Подсказки (основная идея текста):</div>
+      <div id="hintBox"></div>
+    </div>
+
+  </div>
+
+  <!-- окно завершения игры -->
+  <div id="endModal" class="modal" style="display:none;">
+    <div class="modalContent">
+      <h2>Игра окончена</h2>
+      <div>Итоговый счет:</div>
+      <div class="finalScore" id="finalScore">0</div>
+      <button id="watchVideoBtn" class="btn" style="margin-top:8px;">Посмотреть видео</button>
+      <div style="height:8px;"></div>
+      <button id="restartBtn" class="btn secondary" style="margin-top:6px;">Заново</button>
+    </div>
+  </div>
+
+  <!-- окно видео -->
+  <div id="videoModal" class="modal" style="display:none;">
+    <div class="modalContent" style="width: 680px;">
+      <div style="font-weight: bold; margin-bottom: 6px;">Видео по теме (нажмите закрыть после просмотра)</div>
+      <iframe id="videoFrame" src="https://www.youtube.com/embed/8K0rKXhD1ZY" title="Видео о дорожном контроле" allowfullscreen></iframe>
+      <div><button id="closeVideoBtn" class="btn" style="margin-top:8px;">Закрыть</button></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/*
+  Обучающая игра по тексту 2.4 про право остановки транспортных средств
+  - Интерактивная визуализация идеи: чиновники могут останавливать транспорт на постах (карусель)
+  - Счёт за правильные действия, окончательный экран и видео по теме
+  - 1:1 формат, чистый JS + Canvas
+  - Комментарии с привязкой к тексту для удобства связи
+*/
+
+/* ===================== Константы и утилиты ===================== */
+const W = 720;
+const H = 720;
+const lanesY = [210, 360, 510]; // 3 полосы дороги
+const POST_X = [140, 360, 580]; // позиции дорожных постов (указывают место остановки)
+const STOP_RADIUS = 54; // радиус влияния сигнала Стоп (пост)
+const VEH_MIN_SPEED = 1.0;
+const VEH_MAX_SPEED = 2.5;
+
+const COLORS = {
+  truck: "#2ad4a8",
+  bus: "#4a9fff",
+  stopped: "#ffd166",
+  road: "#7a7a7a",
+  post: "#d62e2e",
+  line: "#ffffff",
+  grass: "#2a6b28"
+};
+
+/* Утилиты */
+function rand(min, max) { return Math.random() * (max - min) + min; }
+
+/* ===================== Классы игры ===================== */
+class Vehicle {
+  constructor(x, y, type = "truck") {
+    this.x = x;
+    this.y = y;
+    this.type = type;
+    this.w = type === "bus" ? 78 : 60;
+    this.h = 28;
+    this.speed = rand(VEH_MIN_SPEED, VEH_MAX_SPEED);
+    this.color = type === "bus" ? COLORS.bus : COLORS.truck;
+    this.stopped = false;
+    this.passedAllPosts = false;
+    this.missed = false;
+    this.wheelAng = 0;
+    this.id = Vehicle.nextId++;
+  }
+  update(dt) {
+    if (!this.stopped) {
+      this.x -= this.speed * dt;
+      // немного вращать колеса для реалистичности
+      this.wheelAng += 0.2;
+      if (this.x < -100) {
+        // вышел за пределы экрана
+        this.passedAllPosts = true;
+      }
+    }
+  }
+  draw(ctx) {
+    // простая визуализация:
+    // тело
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x - this.w/2, this.y - this.h/2, this.w, this.h);
+    // колеса
+    ctx.fillStyle = "#111";
+    ctx.fillRect(this.x - this.w/2 + 6, this.y + this.h/2, 12, 6);
+    ctx.fillRect(this.x - this.w/2 + this.w - 18, this.y + this.h/2, 12, 6);
+
+    // маркеры на корпусе
+    ctx.fillStyle = "rgba(255,255,255,0.6)";
+    ctx.fillRect(this.x - this.w/4, this.y - this.h/2 - 6, this.w/2, 4);
+  }
+  stop() {
+    this.stopped = true;
+    this.speed = 0;
+  }
+}
+Vehicle.nextId = 1;
+
+class Post {
+  constructor(index) {
+    this.index = index;
+    this.x = POST_X[index];
+    this.y = lanesY[index % lanesY.length]; // привязываем к одной из дорожных полос
+  }
+  draw(ctx) {
+    // визуальная стойка поста
+    ctx.fillStyle = COLORS.post;
+    ctx.fillRect(this.x - 6, this.y - 40, 12, 65);
+    // знак 7.14.1/7.14.2 как простой круг/обозначение
+    ctx.fillStyle = "#fff";
+    ctx.beginPath();
+    ctx.arc(this.x, this.y - 50, 16, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+class Game {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.vehicles = [];
+    this.posts = [new Post(0), new Post(1), new Post(2)];
+    this.spawnTimer = 0;
+    this.spawnInterval = rand(0.8, 1.6); // секунды
+    this.lastTime = performance.now();
+    this.score = 0;
+    this.lives = 3;
+    this.isRunning = true;
+    this.stopActive = false;
+    this.stopActiveUntil = 0;
+    this.totalElapsed = 0;
+    this.gameOver = false;
+    this.hintsGiven = 0;
+
+    // Привязка методов
+    this.loop = this.loop.bind(this);
+
+    // Подсказки, привязанные к тексту
+    this.hints = [
+      "Право остановки транспортных средств предоставлено регулировщикам (1. главa).",
+      "Уполномоченные лица ФСЖТРН обязаны быть в форменной одежде и использовать диск с красным сигналом или световозвращатель (7.14.2).",
+      "Для привлечения внимания водителей могут использовать сигнал-свисток (7.14.2).",
+      "Границы ответственности охраняются таможенными органами вдоль государственной границы РФ (с соблюдением безопасности)."
+    ];
+
+    // Временная подсказка: показать первую
+    this.resetHints();
+  }
+
+  resetHints() {
+    // можно динамически добавлять подсказки
+    const hintBox = document.getElementById("hintBox");
+    hintBox.innerHTML = "";
+    this.hints.forEach((t, i) => {
+      const p = document.createElement("p");
+      p.className = "quote";
+      p.textContent = t;
+      hintBox.appendChild(p);
+    });
+  }
+
+  spawnVehicle() {
+    const laneIndex = Math.floor(Math.random() * lanesY.length);
+    const y = lanesY[laneIndex];
+    const type = Math.random() < 0.6 ? "truck" : "bus";
+    const x = W + 80;
+    const v = new Vehicle(x, y, type);
+    this.vehicles.push(v);
+  }
+
+  activateStop() {
+    // Активируем режим Стоп на ограниченное время
+    this.stopActive = true;
+    this.stopActiveUntil = performance.now() + 1000; // 1 секунда "период действия"
+  }
+
+  update(dt) {
+    // dt в пикселях, нормировать скорость
+    if (!this.isRunning) return;
+
+    // остановка по таймеру
+    if (this.stopActive && performance.now() > this.stopActiveUntil) {
+      this.stopActive = false;
+    }
+
+    // обновляем движение машин
+    for (let v of this.vehicles) {
+      v.update(dt);
+      // проверить остановку на постах, если активен режим Стоп
+      if (!v.stopped && this.stopActive) {
+        for (let i = 0; i < this.posts.length; i++) {
+          const p = this.posts[i];
+          const dist = Math.abs(v.x - p.x);
+          if (dist <= STOP_RADIUS && v.y > p.y - 60 && v.y < p.y + 60) {
+            v.stop();
+            this.score += 10; // по тексту — за правильную остановку
+            // небольшой визуальный эффект можно добавить позже
+            break;
+          }
+        }
+      }
+
+      // если прошёл все посты и не остановился - минус жизнь
+      if (!v.missed && v.x <= POST_X[POST_X.length - 1] - 40 && !v.stopped) {
+        // пропуск поста: счёт минус жизни
+        v.missed = true;
+        this.lives -= 1;
+        this.score = Math.max(0, this.score - 5);
+        // чтобы не повторять, пометим как прошедший
+      }
+
+      // пометка как прошедший край (чтобы не гонять дальше)
+      if (v.x < -120) {
+        v.passedAllPosts = true;
+      }
+    }
+
+    // удаляем скрытые/вышедшие за экран элементы
+    this.vehicles = this.vehicles.filter(v => !v.passedAllPosts);
+
+    // создание новых автомобилей
+    this.spawnTimer += dt;
+    if (this.spawnTimer > this.spawnInterval) {
+      this.spawnTimer = 0;
+      this.spawnInterval = rand(0.8, 1.6);
+      this.spawnVehicle();
+    }
+
+    // проверка конца игры
+    if (this.lives <= 0) {
+      this.gameOver = true;
+      this.isRunning = false;
+      this.showEndModal();
+    }
+
+    // если игра ещё идёт, продолжаем
+  }
+
+  draw() {
+    const ctx = this.ctx;
+    // фон дороги
+    ctx.clearRect(0, 0, W, H);
+    // поля слева/справа
+    ctx.fillStyle = "#1d2b26";
+    ctx.fillRect(0, 0, W, H);
+
+    // небо/помехи можно добавить позже
+    // дорога
+    ctx.fillStyle = "#3a3a3a";
+    ctx.fillRect(0, 140, W, 360);
+    // разметка дороги
+    ctx.strokeStyle = COLORS.line;
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 3; i++) {
+      const y = lanesY[i];
+      ctx.setLineDash([20, 18]);
+      ctx.beginPath();
+      ctx.moveTo(0, y - 14);
+      ctx.lineTo(W, y - 14);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // трава по краям — просто декоративно
+    ctx.fillStyle = COLORS.grass;
+    ctx.fillRect(0, 0, W, 140);
+    ctx.fillRect(0, 520, W, 200);
+
+    // посты
+    for (let p of this.posts) p.draw(ctx);
+
+    // машины
+    for (let v of this.vehicles) v.draw(ctx);
+
+    // сигналы Стоп (индикаторы рядом с постами) — визуальная подсказка
+    ctx.fillStyle = "rgba(223, 83, 83, 0.7)";
+    for (let p of this.posts) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y - 60, 12, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // безопасность: если стоп активен, нарисуем сигналы
+    if (this.stopActive) {
+      ctx.fillStyle = "rgba(255,0,0,0.2)";
+      ctx.fillRect(0,0,W,H);
+    }
+  }
+
+  loop() {
+    const now = performance.now();
+    const deltaMs = Math.max(1, now - this.lastTime);
+    this.lastTime = now;
+    const dt = deltaMs / 16.666; // нормализация к ~60fps
+
+    if (this.isRunning) {
+      this.update(dt);
+    }
+    this.draw();
+
+    if (!this.gameOver) {
+      requestAnimationFrame(this.loop);
+    }
+  }
+
+  start() {
+    this.isRunning = true;
+    this.lastTime = performance.now();
+    this.loop();
+  }
+
+  pause() {
+    this.isRunning = false;
+  }
+
+  resume() {
+    if (!this.gameOver) {
+      this.isRunning = true;
+      this.lastTime = performance.now();
+      this.loop();
+    }
+  }
+
+  reset() {
+    this.vehicles = [];
+    this.score = 0;
+    this.lives = 3;
+    this.gameOver = false;
+    this.isRunning = true;
+    this.stopActive = false;
+    this.lastTime = performance.now();
+    this.spawnTimer = 0;
+    this.spawnInterval = rand(0.8, 1.6);
+    this.start();
+  }
+
+  showEndModal() {
+    // показать окошко конца игры
+    const endModal = document.getElementById("endModal");
+    const finalScore = document.getElementById("finalScore");
+    finalScore.textContent = String(this.score);
+    endModal.style.display = "flex";
+
+    // кнопки
+    const restartBtn = document.getElementById("restartBtn");
+    restartBtn.onclick = () => {
+      endModal.style.display = "none";
+      this.reset();
+      this.resume();
+      this.hideVideoModalIfOpen();
+      this.loop();
+    };
+  }
+
+  showVideoModal() {
+    const videoModal = document.getElementById("videoModal");
+    videoModal.style.display = "flex";
+  }
+
+  hideVideoModalIfOpen() {
+    document.getElementById("videoModal").style.display = "none";
+  }
+
+  bindUI() {
+    // кнопка Стоп
+    document.getElementById("btnStop").addEventListener("click", () => {
+      this.activateStop();
+    });
+
+    // кнопка выхода
+    document.getElementById("btnExit").addEventListener("click", () => {
+      // "выход" — можно просто остановить игру и показать итог
+      this.isRunning = false;
+      this.showEndModal();
+    });
+
+    // кнопка паузы (вторая кнопка), для удобства
+    document.getElementById("btnPause").addEventListener("click", () => {
+      if (this.isRunning) {
+        this.pause();
+        document.getElementById("btnPause").textContent = "Продолжить";
+      } else {
+        this.resume();
+        document.getElementById("btnPause").textContent = "Пауза";
+      }
+    });
+
+    // кнопка "Посмотреть видео" в окне завершения
+    document.getElementById("watchVideoBtn").addEventListener("click", () => {
+      this.showVideoModal();
+    });
+
+    // кнопка закрыть видео
+    document.getElementById("closeVideoBtn").addEventListener("click", () => {
+      this.hideVideoModalIfOpen();
+    });
+  }
+
+  showVideoModal() {
+    document.getElementById("videoModal").style.display = "flex";
+  }
+
+  hideVideoModalIfOpen() {
+    document.getElementById("videoModal").style.display = "none";
+  }
+}
+
+/* ===================== Инициализация ===================== */
+const canvas = document.getElementById("gameCanvas");
+const game = new Game(canvas);
+game.bindUI();
+
+/* Небольшая инициализация окна: показать рамку, запустить цикл */
+(function init() {
+  // добавить подпорку под Right Pane динамически
+  // правый блок — будет видимым вместе с канвасом
+  const stage = document.getElementById("stage");
+  // В этот минимальный DOM-подход уже добавлено всё необходимое
+  // Запуск игры
+  game.start();
+})();
+
+/* ===================== Примечания к соответствию текста ===================== */
+/*
+  Связь с текстом:
+  - Право остановки транспортных средств предоставлено регулировщикам (посты 7.14.1/7.14.2) — реализовано через посты (POST_X) и сигнал "Стоп".
+  - Уполномоченные лица в форменной одежде — визуальная идея постов и цвет сигнала (красный) через иконку поста и красный круг сигнала.
+  - Сигнал диск/свисток — реализован через кнопочный Стоп, который активирует временный сигнал (stopActive) для остановки приближающихся машин.
+  - Таможня и пограничные зоны — можно отметить как фон дороги и посты на отдельных точках. В рамках мини-игры это отражено как инфраструктура постов по маршруту.
+  - В тексте есть указание на соблюдение правил безопасности — в игре стиль дороги, разметка и сигналы направлены на безопасное поведение водителей.
+  - Концепция: «права остановки» — мы моделируем регламентированное вмешательство, чтобы игрок осознал идею остановки через управляемые сигналы и точек контроля.
+  - Конечная идея: правильная остановка транспортных средств в рамках постов позволяет заработать очки; пропуск постов несет потери — это демонстрирует роль надзора и ответственности на дорогах.
+*/
+
+/* ===================== Конец кода ===================== */
+</script>
+
+</body>
+</html>
