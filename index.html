@@ -1,183 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="ru">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <title>Учебный помощник AI</title>-->
-<!--  <style>-->
-<!--    * {-->
-<!--      margin: 0;-->
-<!--      padding: 0;-->
-<!--      box-sizing: border-box;-->
-<!--      font-family: "Inter", Arial, sans-serif;-->
-<!--    }-->
-
-<!--    body {-->
-<!--      background: #f9fafb;-->
-<!--      color: #111827;-->
-<!--      display: flex;-->
-<!--      flex-direction: column;-->
-<!--      align-items: center;-->
-<!--      padding: 40px 20px;-->
-<!--    }-->
-
-<!--    h1 {-->
-<!--      font-size: 32px;-->
-<!--      font-weight: 700;-->
-<!--      margin-bottom: 10px;-->
-<!--      text-align: center;-->
-<!--    }-->
-
-<!--    p.subtitle {-->
-<!--      font-size: 16px;-->
-<!--      color: #6b7280;-->
-<!--      margin-bottom: 40px;-->
-<!--      text-align: center;-->
-<!--    }-->
-
-<!--    /* Блок загрузки */-->
-<!--    .upload-box {-->
-<!--      background: #fff;-->
-<!--      border: 2px dashed #d1d5db;-->
-<!--      border-radius: 12px;-->
-<!--      padding: 40px;-->
-<!--      width: 600px;-->
-<!--      max-width: 100%;-->
-<!--      text-align: center;-->
-<!--      margin-bottom: 40px;-->
-<!--      box-shadow: 0 2px 6px rgba(0,0,0,0.05);-->
-<!--    }-->
-
-<!--    .upload-box .icon {-->
-<!--      font-size: 28px;-->
-<!--      margin-bottom: 15px;-->
-<!--      color: #4f46e5;-->
-<!--    }-->
-
-<!--    .upload-box p {-->
-<!--      margin-bottom: 8px;-->
-<!--      font-size: 16px;-->
-<!--    }-->
-
-<!--    .upload-box small {-->
-<!--      display: block;-->
-<!--      margin-bottom: 20px;-->
-<!--      color: #6b7280;-->
-<!--    }-->
-
-<!--    .upload-box button {-->
-<!--      background: #111827;-->
-<!--      color: #fff;-->
-<!--      border: none;-->
-<!--      padding: 10px 20px;-->
-<!--      border-radius: 8px;-->
-<!--      cursor: pointer;-->
-<!--      transition: 0.2s;-->
-<!--    }-->
-
-<!--    .upload-box button:hover {-->
-<!--      background: #374151;-->
-<!--    }-->
-
-<!--    /* Недавние документы */-->
-<!--    .recent {-->
-<!--      width: 900px;-->
-<!--      max-width: 100%;-->
-<!--      background: #fff;-->
-<!--      border-radius: 12px;-->
-<!--      padding: 20px;-->
-<!--      box-shadow: 0 2px 6px rgba(0,0,0,0.05);-->
-<!--    }-->
-
-<!--    .recent h2 {-->
-<!--      font-size: 18px;-->
-<!--      margin-bottom: 20px;-->
-<!--    }-->
-
-<!--    .documents {-->
-<!--      display: grid;-->
-<!--      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));-->
-<!--      gap: 16px;-->
-<!--    }-->
-
-<!--    .doc-card {-->
-<!--      background: #f9fafb;-->
-<!--      border: 1px solid #e5e7eb;-->
-<!--      border-radius: 10px;-->
-<!--      padding: 12px;-->
-<!--      display: flex;-->
-<!--      flex-direction: column;-->
-<!--      gap: 6px;-->
-<!--    }-->
-
-<!--    .doc-card .file-icon {-->
-<!--      font-size: 28px;-->
-<!--      margin-bottom: 5px;-->
-<!--    }-->
-
-<!--    .doc-card .name {-->
-<!--      font-size: 14px;-->
-<!--      font-weight: 600;-->
-<!--      color: #111827;-->
-<!--      white-space: nowrap;-->
-<!--      overflow: hidden;-->
-<!--      text-overflow: ellipsis;-->
-<!--    }-->
-
-<!--    .doc-card .size {-->
-<!--      font-size: 12px;-->
-<!--      color: #6b7280;-->
-<!--    }-->
-
-<!--    .doc-card .time {-->
-<!--      font-size: 12px;-->
-<!--      color: #9ca3af;-->
-<!--    }-->
-<!--  </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--  <h1>Учебный помощник AI</h1>-->
-<!--  <p class="subtitle">Загружай книги, статьи, презентации — получай конспекты, тесты и визуализации</p>-->
-
-<!--  <div class="upload-box">-->
-<!--    <div class="icon">⬆️</div>-->
-<!--    <p>Перетащите файлы сюда</p>-->
-<!--    <small>Поддерживаемые форматы: PDF, DOCX, TXT, PNG, JPG, XLSX</small>-->
-<!--    <button>Выбрать файл</button>-->
-<!--  </div>-->
-
-<!--  <div class="recent">-->
-<!--    <h2>Недавние документы</h2>-->
-<!--    <div class="documents">-->
-<!--      <div class="doc-card">-->
-<!--        <div class="file-icon">📄</div>-->
-<!--        <div class="name">Основы машинного обуче...</div>-->
-<!--        <div class="size">2.4 MB</div>-->
-<!--        <div class="time">2 часа назад</div>-->
-<!--      </div>-->
-<!--      <div class="doc-card">-->
-<!--        <div class="file-icon">📄</div>-->
-<!--        <div class="name">Лекция по нейронным сетя...</div>-->
-<!--        <div class="size">1.2 MB</div>-->
-<!--        <div class="time">1 день назад</div>-->
-<!--      </div>-->
-<!--      <div class="doc-card">-->
-<!--        <div class="file-icon">📄</div>-->
-<!--        <div class="name">Исследование по ИИ.txt</div>-->
-<!--        <div class="size">850 KB</div>-->
-<!--        <div class="time">3 дня назад</div>-->
-<!--      </div>-->
-<!--      <div class="doc-card">-->
-<!--        <div class="file-icon">🖼️</div>-->
-<!--        <div class="name">Диаграммы алгоритмов.png</div>-->
-<!--        <div class="size">3.1 MB</div>-->
-<!--        <div class="time">5 дней назад</div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</body>-->
-<!--</html>-->
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -185,203 +5,81 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Учебный помощник AI</title>
 <style>
-  :root{
-    --bg:#f6f8fb;
-    --bg-weak:#f1f4f9;
-    --card:#ffffff;
-    --text:#0f172a;
-    --muted:#6b7280;
-    --muted-2:#9aa3b2;
-    --primary:#2b6bf3;
-    --primary-2:#134fe6;
-    --stroke:#e6eaf2;
-    --dash:#d7dce6;
-    --shadow:0 8px 24px rgba(15,23,42,.06);
-    --radius:14px;
-  }
+  :root{ --bg:#f6f8fb; --card:#ffffff; --text:#0f172a; --muted:#6b7280; --stroke:#e6eaf2; --dash:#d7dce6; --shadow:0 8px 24px rgba(15,23,42,.06); }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-  }
+  body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+  [hidden]{display:none!important} /* <-- жёстко прячем скрытые панели/вкладки */
 
-  /* ======= базовый контейнер ======= */
-  .wrap{
-    max-width:1120px;
-    margin:0 auto;
-    padding:28px 16px 60px;
-  }
-  .center{display:flex;justify-content:center}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 16px 60px}
+  .brand-mark{width:44px;height:44px;border-radius:12px;background:linear-gradient(180deg,#6f79ff,#6a4df5);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;box-shadow:0 10px 30px rgba(52,87,255,.25);margin:12px auto 18px}
+  .h1{font-size:40px;font-weight:800;text-align:center;margin:0 0 8px}
+  .subtitle{text-align:center;color:#7b8497;font-size:16px;margin-bottom:34px}
 
-  /* ======= шапка главной ======= */
-  .brand-mark{
-    width:44px;height:44px;border-radius:12px;
-    background:linear-gradient(180deg,#6f79ff 0%, #6a4df5 100%);
-    display:flex;align-items:center;justify-content:center;
-    color:#fff;font-weight:700;font-size:18px;
-    box-shadow:0 10px 30px rgba(52,87,255,.25);
-    margin:12px auto 18px;
-  }
-  .h1{
-    font-size:40px;font-weight:800;letter-spacing:.2px;text-align:center;margin:0 0 8px;
-  }
-  .subtitle{
-    text-align:center;color:#7b8497;font-size:16px;margin-bottom:34px;
-  }
-
-  /* ======= upload ======= */
-  .upload-card{
-    background:var(--card);
-    border-radius:18px;
-    box-shadow:var(--shadow);
-    padding:26px;
-    width:760px;max-width:100%;
-    margin:0 auto 28px;
-  }
-  .upload-area{
-    border:2px dashed var(--dash);
-    border-radius:16px;
-    padding:38px 18px;
-    text-align:center;
-    background:#fafbfe;
-  }
-  .upload-icon{font-size:24px;color:var(--primary);margin-bottom:10px}
+  .upload-card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:26px;width:760px;max-width:100%;margin:0 auto 28px}
+  .upload-area{border:2px dashed var(--dash);border-radius:16px;padding:38px 18px;text-align:center;background:#fafbfe}
+  .upload-icon{font-size:24px;color:#2b6bf3;margin-bottom:10px}
   .upload-title{font-size:18px;font-weight:600;margin-bottom:6px}
   .upload-hint{color:#8892a6;font-size:13px;margin-bottom:16px}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    padding:10px 16px;border-radius:10px;border:0;cursor:pointer;
-    background:#0b1324;color:#fff;font-weight:600;box-shadow:0 6px 16px rgba(11,19,36,.18);
-  }
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border-radius:10px;border:0;cursor:pointer;background:#0b1324;color:#fff;font-weight:600;box-shadow:0 6px 16px rgba(11,19,36,.18)}
   .btn:hover{background:#1a2540}
 
-  /* ======= Недавние документы ======= */
-  .panel{
-    background:var(--card);border-radius:18px;box-shadow:var(--shadow);
-    padding:18px 18px 22px;
-  }
-  .panel-title{
-    display:flex;align-items:center;gap:10px;font-weight:700;margin:4px 2px 14px;font-size:18px;
-  }
-  .clock{width:18px;height:18px;border-radius:9px;background:#f1f4ff;display:inline-flex;align-items:center;justify-content:center;color:#6271ff}
+  .panel{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:18px}
+  .panel-title{font-weight:700;margin:4px 2px 14px;font-size:18px}
   .docs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   @media (max-width:900px){.docs{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:560px){.docs{grid-template-columns:1fr}}
-  .doc{
-    background:#fbfcff;border:1px solid #eef2f7;border-radius:12px;padding:14px;
-    display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;cursor:pointer;
-    transition:box-shadow .2s,border-color .2s;
-  }
+  .doc{background:#fbfcff;border:1px solid #eef2f7;border-radius:12px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;cursor:pointer;transition:box-shadow .2s,border-color .2s}
   .doc:hover{box-shadow:0 8px 22px rgba(16,24,40,.06)}
-  .doc.active{border-color:#a6b6ff;box-shadow:0 8px 26px rgba(52, 87, 255,.15)}
-  .doc-ico{
-    width:40px;height:40px;border-radius:10px;background:#f1f4fb;display:flex;align-items:center;justify-content:center;color:#8b98b3;
-    font-size:22px;
-  }
+  .doc-ico{width:40px;height:40px;border-radius:10px;background:#f1f4fb;display:flex;align-items:center;justify-content:center;color:#8b98b3;font-size:22px}
   .doc-name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .doc-meta{color:#8b96ac;font-size:12px}
-  .doc-col{display:flex;flex-direction:column;gap:4px}
 
-  /* ======= Top bar на внутренних страницах ======= */
-  .topbar{
-    display:flex;align-items:center;justify-content:space-between;margin:10px 0 12px;
-  }
-  .crumb{display:flex;align-items:center;gap:10px;color:#7d889b}
-  .crumb .dot{width:8px;height:8px;border-radius:50%;background:#e2e8f0}
-  .file-line{display:flex;align-items:center;gap:10px}
-  .file-chip{
-    display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--stroke);
-    padding:10px 14px;border-radius:12px;
-  }
-  .pill-actions{display:flex;gap:10px}
-  .pill{
-    display:inline-flex;gap:8px;align-items:center;background:#121a33;color:#fff;border-radius:12px;padding:10px 14px;font-weight:700;
-    box-shadow:0 10px 24px rgba(17,26,51,.25);cursor:pointer;text-decoration:none;
-  }
-  .pill.secondary{background:#1f2430}
-  .pill .emoji{font-size:16px}
-
-  /* ======= две колонки ======= */
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin:10px 0 12px}
   .two-cols{display:grid;grid-template-columns:1fr 430px;gap:22px}
   @media (max-width:1000px){.two-cols{grid-template-columns:1fr}}
-  .card{
-    background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px 16px 18px;
-  }
-  .card-title{font-weight:700;margin:2px 2px 12px;display:flex;align-items:center;gap:8px}
-  .pdf{
-    background:#eef2f6;border:1px solid var(--stroke);border-radius:16px;height:520px;display:flex;align-items:center;justify-content:center;position:relative;
-  }
-  .progress{
-    position:absolute;left:50%;bottom:28%;transform:translateX(-50%);width:54%;
-  }
-  .progress small{display:block;text-align:center;color:#7b8497;margin-bottom:10px}
-  .bar{
-    height:8px;border-radius:8px;background:#dbe3ff;overflow:hidden;
-  }
-  .bar>i{display:block;height:100%;width:75%;background:#3b82f6;border-radius:8px}
 
-  /* ======= табы ======= */
-  .tabs{
-    display:flex;gap:8px;background:#f4f6fb;border-radius:12px;padding:6px;align-self:flex-start;
-    width:max-content;margin:0 6px 14px;
-  }
-  .tab{
-    font-weight:700;padding:8px 14px;border-radius:10px;color:#59657c;cursor:pointer;user-select:none;
-  }
+  .card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px}
+  .card-title{font-weight:700;margin:2px 2px 12px}
+
+  /* Ридер */
+  .reader{background:#eef2f6;border:1px solid var(--stroke);border-radius:16px;height:520px;display:flex;flex-direction:column;overflow:hidden}
+  .reader-toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px 12px;background:#f7f9fe;border-bottom:1px solid #e9eef6}
+  .reader-body{flex:1;overflow:auto;padding:14px 16px;background:#fff}
+  .reader-body h3{margin:0 0 10px}
+  .muted{color:#6b7280}
+
+  /* Правый столбец */
+  .tabs{display:flex;gap:8px;background:#f4f6fb;border-radius:12px;padding:6px;width:max-content;margin:0 6px 14px}
+  .tab{font-weight:700;padding:8px 14px;border-radius:10px;color:#59657c;cursor:pointer;user-select:none}
   .tab.active{background:#fff;color:#0f172a;border:1px solid #e9edf5;box-shadow:0 3px 10px rgba(0,0,0,.04)}
-
-  /* ======= списки справа (чанки/конспект/QA) ======= */
   .list{display:flex;flex-direction:column;gap:10px}
-  .item{
-    background:#fff;border:1px solid #eef1f6;border-radius:12px;padding:14px 14px;
-    display:flex;gap:10px;align-items:flex-start;justify-content:space-between;
-  }
-  .item:hover{box-shadow:0 8px 20px rgba(16,24,40,.06)}
-  .item .left{display:flex;gap:10px;align-items:flex-start}
+  .item{background:#fff;border:1px solid #eef1f6;border-radius:12px;padding:14px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+  .left{display:flex;gap:10px;align-items:flex-start}
   .dot-blue{width:8px;height:8px;border-radius:50%;background:#5a67f6;margin-top:7px}
-  .item h4{margin:0 0 4px;font-size:15px}
-  .item p{margin:0;color:#7b8599}
   .badge{background:#f5f6ff;border:1px solid #e0e5ff;color:#6a73d7;font-size:12px;border-radius:10px;padding:6px 8px}
-  .arrow{opacity:.5}
 
-  /* ======= пустой визуал ======= */
-  .empty{
-    height:520px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
-    color:#6e7890;
-  }
-  .btn-primary{
-    margin-top:6px;background:#0b1324;border:0;color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;
-  }
+  /* GPT чат — ТОЛЬКО внутри #tab-gpt */
+  #tab-gpt .chat{display:flex;flex-direction:column;height:520px;background:#fff;border:1px solid #eef1f6;border-radius:16px;overflow:hidden}
+  #tab-gpt .chat-body{flex:1;overflow:auto;padding:14px}
+  #tab-gpt .msg{max-width:85%;margin:6px 0;padding:10px 12px;border-radius:12px;border:1px solid #e7ebf3;background:#f9fbff;white-space:pre-wrap}
+  #tab-gpt .msg.me{margin-left:auto;background:#121a33;color:#fff;border-color:#121a33}
+  #tab-gpt .chat-foot{display:flex;gap:8px;border-top:1px solid #eef1f6;padding:10px;background:#f7f9fe}
+  #tab-gpt .inp{flex:1;padding:10px 12px;border:1px solid #e5e9f2;border-radius:10px;outline:none}
+  #tab-gpt .sources{color:#6a73d7;font-size:12px;margin-top:6px}
 
-  /* ======= Quiz ======= */
-  .quiz-wrap{max-width:920px;margin:0 auto}
-  .quiz-top{display:grid;grid-template-columns:1fr 120px;gap:12px;margin:8px 0 16px}
-  .progress-line{height:8px;background:#e7ecf7;border-radius:8px;overflow:hidden}
-  .progress-line>i{display:block;width:100%;height:100%;background:#cad4f7}
-  .quiz-card{
-    background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:18px 18px 20px;border:1px solid #eef2f6;
-  }
-  .quiz-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-  .quiz-title{font-weight:800;font-size:20px}
-  .time-chip{background:#f7f7fb;border:1px solid #eceef6;border-radius:10px;padding:8px 10px;color:#6f7890;font-weight:700}
-  .opt{
-    display:flex;gap:10px;align-items:center;border:1px solid #e7ebf3;background:#f9fbff;border-radius:12px;padding:12px;margin-top:12px;cursor:pointer;
-  }
-  .radio{
-    width:18px;height:18px;border-radius:50%;border:2px solid #c4ccda;background:#fff;display:inline-block;position:relative;
-  }
-  .opt:hover{box-shadow:0 8px 20px rgba(16,24,40,.06)}
-  .actions{display:flex;justify-content:flex-end;margin-top:16px}
-  .btn-grey{
-    background:#868e99;color:#fff;border:0;border-radius:10px;padding:10px 14px;font-weight:700
-  }
-
-  /* ======= общие хелперы ======= */
-  [hidden]{display:none!important}
-  a.link{color:inherit;text-decoration:none}
+  /* Визуал (игра) */
+  .viz-form{width:100%;max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:12px;background:#fff;border:1px solid #eef2f6;border-radius:16px;box-shadow:var(--shadow);padding:16px}
+  .viz-row{display:flex;gap:10px;flex-wrap:wrap}
+  .viz-chip{flex:1;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fbfcff;border:1px solid #eef2f6;border-radius:12px;padding:10px 12px}
+  .viz-text{width:100%;min-height:160px;border:1px solid var(--stroke);border-radius:12px;padding:12px;background:#fff;resize:vertical}
+  .viz-game{background:#fff;border:1px solid #eef2f6;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .viz-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-bottom:1px solid #eef2f6;background:#f7f9fe}
+  .viz-frame{height:75vh;min-height:520px;position:relative}
+  .viz-iframe{width:100%;height:100%;border:0}
+  .viz-loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.6);backdrop-filter:blur(2px);font-weight:700;color:#0f172a}
+  .viz-loader[hidden]{display:none}
+  .viz-error{padding:10px;color:#7a1f1f;background:#fff5f5;border:1px solid #ffe0e0;border-radius:10px;margin-top:10px}
 </style>
 </head>
 <body>
@@ -390,258 +88,450 @@
 <section id="view-home" class="wrap">
   <div class="brand-mark">◻︎</div>
   <h1 class="h1">Учебный помощник AI</h1>
-  <p class="subtitle">Загружай книги, статьи, презентации — получай конспекты, тесты и визуализации</p>
+  <p class="subtitle">3 примера книг (литература, ИИ, лор игры) + загрузка своей. Чтение, Чанки, Конспект, GPT и Визуал (игра)</p>
 
   <div class="upload-card">
-    <div class="upload-area">
+    <div class="upload-area" id="upload-area">
       <div class="upload-icon">🡅</div>
-      <div class="upload-title">Перетащите файлы сюда</div>
-      <div class="upload-hint">Поддерживаемые форматы: PDF, DOCX, TXT, PNG, JPG, XLSX</div>
-
-      <!-- фейковая кнопка input -->
+      <div class="upload-title">Перетащите файл сюда</div>
+      <div class="upload-hint">PDF / EPUB / FB2 / TXT</div>
       <input id="file-input" type="file" multiple hidden>
       <button class="btn" onclick="document.getElementById('file-input').click()">Выбрать файл</button>
     </div>
   </div>
 
   <div class="panel">
-    <div class="panel-title"><span class="clock">🕒</span>Недавние документы</div>
-    <div class="docs">
-      <div class="doc" data-route="#/doc/chunks">
-        <div class="doc-ico">📄</div>
-        <div class="doc-col">
-          <div class="doc-name">Основы машинного обуче...</div>
-          <div class="doc-meta">2.4 MB • 2 часа назад</div>
-        </div>
-      </div>
-      <div class="doc active" data-route="#/doc/chunks">
-        <div class="doc-ico">📄</div>
-        <div class="doc-col">
-          <div class="doc-name">Лекция по нейронным сетям.docx</div>
-          <div class="doc-meta">1.2 MB • 1 день назад</div>
-        </div>
-      </div>
-      <div class="doc" data-route="#/doc/chunks">
-        <div class="doc-ico">📄</div>
-        <div class="doc-col">
-          <div class="doc-name">Исследование по ИИ.txt</div>
-          <div class="doc-meta">850 KB • 3 дня назад</div>
-        </div>
-      </div>
-      <div class="doc" data-route="#/doc/chunks">
-        <div class="doc-ico">🖼️</div>
-        <div class="doc-col">
-          <div class="doc-name">Диаграммы алгоритмов.png</div>
-          <div class="doc-meta">3.1 MB • 5 дней назад</div>
-        </div>
-      </div>
-    </div>
+    <div class="panel-title">Недавние документы</div>
+    <div id="docs" class="docs"></div>
   </div>
 </section>
 
-<!-- ===================== DOC LAYOUT ===================== -->
+<!-- ===================== DOC ===================== -->
 <section id="view-doc" class="wrap" hidden>
   <div class="topbar">
-    <div class="file-line">
+    <div style="display:flex;gap:10px;align-items:center">
       <div class="doc-ico">📄</div>
       <div>
-        <div class="doc-name" style="font-size:16px">Лекция по нейронным сетям.docx</div>
-        <div class="doc-meta">1.2 MB • 1 день назад</div>
+        <div class="doc-name" id="current-filename" style="font-size:16px">Документ</div>
+        <div class="doc-meta" id="current-meta">—</div>
       </div>
     </div>
-    <div class="pill-actions">
-      <a class="pill link" href="#/quiz"><span class="emoji">🧠</span>Тестирование</a>
-      <a class="pill secondary link" href="#/home"><span class="emoji">👥</span>Команда</a>
+    <div style="display:flex;gap:10px">
+      <a class="btn" href="#/home">🏠 Домой</a>
     </div>
   </div>
 
   <div class="two-cols">
-    <!-- левая колонка -->
+    <!-- ЛЕВАЯ: Ридер -->
     <div class="card">
-      <div class="card-title">🗂️ PDF Просмотрщик</div>
-      <div class="pdf">
-        <div class="progress">
-          <small>PDF документ загружается...</small>
-          <div class="bar"><i></i></div>
-          <small style="margin-top:6px;color:#7a8ff0">Обработано 75%</small>
+      <div class="card-title">📖 Чтение</div>
+      <div class="reader">
+        <div class="reader-toolbar">
+          <div>
+            <button class="btn" id="prevPage">←</button>
+            <button class="btn" id="nextPage">→</button>
+          </div>
+          <div class="muted">Стр. <span id="pageNum">1</span> / <span id="pageTotal">1</span></div>
         </div>
+        <div class="reader-body" id="readerBody"><h3>Откройте документ</h3><div class="muted">Выберите книгу на главной</div></div>
       </div>
     </div>
 
-    <!-- правая колонка -->
+    <!-- ПРАВАЯ: вкладки -->
     <div class="card">
       <div class="tabs">
         <div class="tab" data-tab="chunks">Чанки</div>
         <div class="tab" data-tab="conspect">Конспект</div>
-        <div class="tab" data-tab="qa">Q&A</div>
+        <div class="tab" data-tab="gpt">GPT</div>
         <div class="tab" data-tab="visual">Визуал</div>
       </div>
 
-      <!-- Содержимое табов -->
+      <!-- Чанки -->
       <div id="tab-chunks" class="list"></div>
+
+      <!-- Конспект -->
       <div id="tab-conspect" class="list" hidden></div>
-      <div id="tab-qa" class="list" hidden></div>
-      <div id="tab-visual" class="empty" hidden>
-        <div style="font-size:22px">⚡ Создание визуализации</div>
-        <div>Генерируем mindmap и временную шкалу...</div>
-        <button class="btn-primary">▶ Запустить анализ</button>
+
+      <!-- GPT -->
+      <div id="tab-gpt" hidden>
+        <div class="chat">
+          <div id="gptBody" class="chat-body"></div>
+          <div class="chat-foot">
+            <input id="gptInput" class="inp" placeholder="Спросите по этой книге…" />
+            <button id="gptSend" class="btn">Отправить</button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ===================== QUIZ ===================== -->
-<section id="view-quiz" class="wrap" hidden>
-  <div class="file-line" style="gap:12px;margin-bottom:6px">
-    <div class="doc-ico">🧠</div>
-    <div>
-      <div class="doc-name" style="font-size:18px">Тестирование знаний</div>
-      <div class="doc-meta">Проверьте своё понимание материала</div>
-    </div>
-  </div>
+      <!-- Визуал: панель и игра (взаимоисключаемые) -->
+      <div id="tab-visual" hidden>
+        <div id="viz-panel" class="viz-form">
+          <textarea id="vizText" class="viz-text" placeholder="Вставьте отрывок или нажмите «Взять из 1-й главы»"></textarea>
+          <div class="viz-row">
+            <label class="viz-chip"><span>Вайб</span>
+              <select id="vizVibe"><option>cinematic</option><option>arcade</option><option>cozy</option><option selected>neon</option><option>retro</option></select>
+            </label>
+            <label class="viz-chip"><span>Палитра</span>
+              <select id="vizPalette"><option selected>dark</option><option>light</option><option>paper</option><option>vapor</option></select>
+            </label>
+            <label class="viz-chip"><span>Тип</span>
+              <select id="vizGameType"><option selected>quiz</option><option>dialog</option><option>novel</option><option>platformer</option><option>arcade</option><option>roguelike</option></select>
+            </label>
+          </div>
+          <label class="viz-chip" style="flex:1;justify-content:space-between">
+            <span>Сложность</span><span id="vizDiffVal">60%</span>
+            <input id="vizDifficulty" type="range" min="0" max="100" value="60" style="width:60%">
+          </label>
+          <div class="viz-row">
+            <label class="viz-chip"><input id="vizLong" type="checkbox" checked> Длинный код</label>
+            <label class="viz-chip"><input id="vizAudio" type="checkbox"> Звук</label>
+            <label class="viz-chip"><input id="vizProcedural" type="checkbox" checked> Проц. генерация</label>
+          </div>
+          <div class="viz-row" style="justify-content:center">
+            <button id="btnFromChapter" class="btn" type="button">📑 Взять из 1-й главы</button>
+            <button id="vizRun" class="btn" type="button">▶ Запустить анализ</button>
+          </div>
+        </div>
 
-  <div class="quiz-wrap">
-    <div class="quiz-top">
-      <div class="progress-line"><i></i></div>
-      <div class="doc-meta" style="text-align:right">1/1</div>
-    </div>
-
-    <div class="quiz-card">
-      <div class="quiz-head">
-        <div class="quiz-title">Вопрос 1</div>
-        <div class="time-chip">⏱ Без ограничений</div>
+        <div id="viz-game" class="viz-game" hidden>
+          <div class="viz-toolbar">
+            <button id="vizBack" class="btn">← Назад к настройкам</button>
+            <button id="vizDownload" class="btn">Скачать game.html</button>
+          </div>
+          <div class="viz-frame">
+            <div id="vizLoader" class="viz-loader" hidden>Генерация игры…</div>
+            <iframe id="vizFrame" class="viz-iframe" allowfullscreen></iframe>
+          </div>
+          <div id="vizErr" class="viz-error" hidden></div>
+        </div>
       </div>
-      <div style="font-weight:700;margin:8px 0 6px">Что является основной целью машинного обучения?</div>
 
-      <div class="opt"><span class="radio"></span>Создание роботов</div>
-      <div class="opt"><span class="radio"></span>Автоматизация построения аналитических моделей</div>
-      <div class="opt"><span class="radio"></span>Программирование на Python</div>
-      <div class="opt"><span class="radio"></span>Разработка веб‑сайтов</div>
-
-      <div class="actions"><button class="btn-grey" onclick="location.hash='#/doc/chunks'">Завершить</button></div>
     </div>
   </div>
 </section>
 
 <script>
-/* ---------- мини-данные для отрисовки правой колонки ---------- */
-const chunks = [
-  {title:'Введение в машинное обучение', text:'Машинное обучение — это метод анализа данных...', page:'стр. 1'},
-  {title:'Типы машинного обучения', text:'Существует три основных типа машинного обучения...', page:'стр. 2'},
-  {title:'Нейронные сети', text:'Нейронные сети — это вычислительные системы...', page:'стр. 5'},
-  {title:'Глубокое обучение', text:'Глубокое обучение — это подмножество машинного обучения...', page:'стр. 8'},
-];
-const conspect = [
-  {title:'Основные концепции', items:['Алгоритмы обучения','Модели данных','Оценка качества']},
-  {title:'Типы обучения', items:['Контролируемое обучение','Неконтролируемое обучение','Обучение с подкреплением']},
-  {title:'Практическое применение', items:['Компьютерное зрение','Обработка языка','Рекомендательные системы']},
-];
-const qa = [
-  {q:'Что такое машинное обучение?', a:'Машинное обучение — это метод анализа данных...'},
-  {q:'Какие основные типы машинного обучения существуют?', a:'Контролируемое, неконтролируемое и обучение с подкреплением.'},
-  {q:'Что такое нейронная сеть?', a:'Вычислительная система, вдохновленная биологическими нейронными сетями...'},
-];
+/* ===== helpers ===== */
+function el(tag, cls, html){ const n=document.createElement(tag); if(cls) n.className=cls; if(html!==undefined) n.innerHTML=html; return n; }
+function show(id){ document.querySelectorAll('section[id^="view-"]').forEach(v=>v.hidden=true); document.getElementById(id).hidden=false; }
 
-/* ---------- helpers ---------- */
-function el(tag, cls, html){
-  const n=document.createElement(tag);
-  if(cls) n.className=cls;
-  if(html) n.innerHTML=html;
-  return n;
+/* ===== роутинг ===== */
+function route(){
+  const h = location.hash || '#/home';
+  if(h.startsWith('#/home')){ show('view-home'); }
+  else if(h.startsWith('#/doc/')){ show('view-doc'); const tab = h.split('/')[2] || 'chunks'; switchTab(tab); }
+  else { location.hash='#/home'; }
+}
+window.addEventListener('hashchange', route); route();
+
+/* ===== глобальное состояние ===== */
+window._current = { title:'', meta:'', pages:[], page:1, chapters:[], conspect:[] };
+window._ui = { activeTab: 'chunks', vizBlobUrl: null, gptHistory: [] };
+
+/* ===== Недавние (samples) ===== */
+async function loadSamples(){
+  const box=document.getElementById('docs'); box.innerHTML='';
+  try{
+    const r = await fetch('/samples'); const d = await r.json();
+    (d.items||[]).forEach(s=>{
+      const card=el('div','doc');
+      card.addEventListener('click', ()=> openSample(s));
+      card.append(el('div','doc-ico','📄'));
+      const col=el('div','doc-col',''); col.append(el('div','doc-name',s.title)); col.append(el('div','doc-meta',`${s.size} • ${s.meta}`)); card.append(col);
+      box.append(card);
+    });
+  }catch(e){
+    box.innerHTML='<div class="doc-meta">Не удалось загрузить примеры</div>';
+  }
+}
+loadSamples();
+
+async function openSample(s){
+  try{
+    const j = await fetch(s.json_url).then(r=>r.json());
+    setCurrentFromData(j);
+  }catch(e){
+    alert('Не удалось открыть пример: '+e.message);
+  }
 }
 
-/* ---------- рендер правой колонки ---------- */
+/* ===== Upload ===== */
+const input = document.getElementById('file-input');
+const area  = document.getElementById('upload-area');
+const hint  = document.querySelector('.upload-hint');
+function setHint(h){ if(hint) hint.innerHTML = h; }
+input.addEventListener('change', e => { const f=e.target.files?.[0]; if(f) upload(f); e.target.value=''; });
+['dragenter','dragover'].forEach(ev=> area.addEventListener(ev, e=>{ e.preventDefault(); area.style.background='#f2f6ff'; }));
+['dragleave','drop'].forEach(ev=> area.addEventListener(ev, e=>{ e.preventDefault(); area.style.background='#fafbfe'; }));
+area.addEventListener('drop', e=>{ const f=e.dataTransfer.files?.[0]; if(f) upload(f); });
+
+async function upload(file){
+  if(!/\.(pdf|epub|fb2|txt)$/i.test(file.name)){ alert('Поддерживаются PDF/EPUB/FB2/TXT'); return; }
+  const fd = new FormData(); fd.append('file', file);
+  setHint('Загрузка и обработка (2 фрагмента)…');
+  try{
+    const r = await fetch('/upload', { method:'POST', body: fd });
+    const d = await r.json();
+    if(!r.ok || !d.ok) throw new Error(d.error||d.details||'Ошибка загрузки');
+    setHint(`Готово: <a class="link" href="${d.json_url}" target="_blank">data.json</a> • глав: ${d.chapters_count}`);
+    const j = await fetch(d.json_url).then(r=>r.json());
+    setCurrentFromData(j);
+  }catch(err){
+    alert('Ошибка: '+err.message); setHint('PDF / EPUB / FB2 / TXT');
+  }
+}
+
+/* ===== UI из JSON ===== */
+function setCurrentFromData(j){
+  window._current.title = j.title||'Документ';
+  window._current.meta  = j.meta||'';
+  window._current.pages = j.pages||[];
+  window._current.page  = 1;
+  window._current.chapters = j.chapters||[];
+  window._current.conspect = j.conspect||[];
+
+  document.getElementById('current-filename').textContent = window._current.title;
+  document.getElementById('current-meta').textContent = window._current.meta;
+
+  renderReader();
+
+  // очистка вкладок
+  cleanupTab('chunks'); cleanupTab('conspect'); cleanupTab('gpt'); resetVisualUI();
+  window._ui.gptHistory = []; // новая книга — новая история
+  location.hash='#/doc/chunks';
+}
+
+/* ===== Reader ===== */
+function renderReader(){
+  const body=document.getElementById('readerBody');
+  const pageEl=document.getElementById('pageNum');
+  const totEl=document.getElementById('pageTotal');
+  const pages=window._current.pages||[];
+  const page=Math.max(1, Math.min(pages.length||1, window._current.page||1));
+  window._current.page = page;
+  pageEl.textContent = String(page);
+  totEl.textContent = String(pages.length||1);
+  body.innerHTML = `<h3>${window._current.title}</h3><div>${(pages[page-1]||'').replace(/\n/g,'<br>')}</div>`;
+}
+document.getElementById('prevPage').addEventListener('click', ()=>{ window._current.page=Math.max(1,(window._current.page||1)-1); renderReader(); });
+document.getElementById('nextPage').addEventListener('click', ()=>{ const t=(window._current.pages||[]).length||1; window._current.page=Math.min(t,(window._current.page||1)+1); renderReader(); });
+
+/* ===== Эксклюзивные вкладки ===== */
+function switchTab(name){
+  ['chunks','conspect','gpt','visual'].forEach(n=>{
+    const el = document.getElementById('tab-'+n);
+    if(el) el.hidden = (n !== name);
+  });
+  document.querySelectorAll('#view-doc .tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  const prev = window._ui.activeTab;
+  if(prev && prev !== name) cleanupTab(prev);
+  window._ui.activeTab = name;
+  if(name === 'chunks')   renderChunks();
+  if(name === 'conspect') renderConspect();
+  if(name === 'gpt')      renderGPT();
+  if(name === 'visual')   bindVisualHandlers();
+}
+
+function cleanupTab(name){
+  if(name === 'visual'){ resetVisualUI(); return; }
+  if(name === 'gpt'){
+    // Полный сброс чата (DOM + история + обработчики)
+    const body  = document.getElementById('gptBody');
+    const input = document.getElementById('gptInput');
+    const send  = document.getElementById('gptSend');
+    window._ui.gptHistory = [];
+    if(body)  body.innerHTML='';
+    if(input){ input.value=''; input.disabled=false; input.onkeydown=null; input.removeAttribute('data-bound'); }
+    if(send){ send.disabled=false; send.onclick=null; send.removeAttribute('data-bound'); }
+    return;
+  }
+  const box = document.getElementById('tab-'+name);
+  if(box) box.innerHTML = '';
+}
+
+/* ===== Рендер: Чанки / Конспект ===== */
 function renderChunks(){
-  const box=document.getElementById('tab-chunks');
-  box.innerHTML='';
-  chunks.forEach(c=>{
+  const box=document.getElementById('tab-chunks'); box.innerHTML='';
+  (window._current.chapters||[]).forEach(c=>{
     const it=el('div','item');
-    const left=el('div','left');
-    left.append(el('div','dot-blue'));
-    const txt=el('div','');
-    txt.append(el('h4','',c.title));
-    txt.append(el('p','',c.text));
-    left.append(txt);
-    it.append(left);
-    it.append(el('span','badge',c.page));
+    const left=el('div','left'); left.append(el('div','dot-blue'));
+    const txt=el('div',''); txt.append(el('h4','', c.title||'(без названия)'));
+    const sn=(c.text||'').trim().slice(0,400)+(((c.text||'').length>400)?'…':'');
+    txt.append(el('p','', sn)); left.append(txt); it.append(left);
+    it.append(el('span','badge','глава'));
     box.append(it);
   });
 }
 function renderConspect(){
-  const box=document.getElementById('tab-conspect');
-  box.innerHTML='';
-  conspect.forEach(b=>{
+  const box=document.getElementById('tab-conspect'); box.innerHTML='';
+  const list = window._current.conspect||[];
+  if(!list.length){ box.append(el('div','muted','Для этого документа конспект не задан.')); return; }
+  list.forEach(p=>{
     const it=el('div','item');
-    const left=el('div','left');
-    left.append(el('div','dot-blue'));
-    const txt=el('div','');
-    txt.append(el('h4','',b.title));
-    txt.append(el('p','',b.items.join('<br>')));
-    left.append(txt);
-    it.append(left);
-    box.append(it);
-  });
-}
-function renderQA(){
-  const box=document.getElementById('tab-qa');
-  box.innerHTML='';
-  qa.forEach(r=>{
-    const it=el('div','item');
-    const left=el('div','left');
-    left.append(el('div','dot-blue'));
-    const txt=el('div','');
-    txt.append(el('h4','',r.q));
-    txt.append(el('p','',r.a));
-    left.append(txt);
-    it.append(left);
+    const left=el('div','left'); left.append(el('div','dot-blue'));
+    const txt=el('div',''); txt.append(el('p','', p));
+    left.append(txt); it.append(left);
     box.append(it);
   });
 }
 
-/* ---------- табы в документе ---------- */
-function setActiveTab(name){
-  document.querySelectorAll('#view-doc .tab').forEach(t=>{
-    t.classList.toggle('active', t.dataset.tab===name);
-  });
-  ['chunks','conspect','qa','visual'].forEach(n=>{
-    document.getElementById('tab-'+n).hidden = (n!==name);
-  });
+/* ===== GPT чат (существует только в #tab-gpt) ===== */
+function renderGPT(){
+  const body = document.getElementById('gptBody');
+  const input = document.getElementById('gptInput');
+  const send  = document.getElementById('gptSend');
+  window._ui.gptHistory = [];
+
+  if(body){
+    body.innerHTML='';
+    const hello = document.createElement('div');
+    hello.className='msg';
+    hello.textContent = `Спроси что-нибудь по книге «${window._current.title||'документ'}». Отвечаю только по её содержанию.`;
+    body.append(hello);
+  }
+
+  async function askBackend(question){
+    input.disabled = true; send.disabled = true;
+    try{
+      const payload = {
+        question,
+        history: window._ui.gptHistory,
+        doc: { title: window._current.title, chapters: window._current.chapters, pages: window._current.pages }
+      };
+      const r = await fetch('/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+      const raw = await r.text(); let d=null; try{ d=raw?JSON.parse(raw):null }catch{}
+      if(!r.ok || !d || !d.answer){
+        pushAssistant((d&&(d.error||d.details))||'Ошибка.');
+      } else {
+        pushAssistant(d.answer, d.used||[]);
+      }
+    }catch(e){
+      pushAssistant('Сетевая ошибка: '+e.message);
+    }finally{
+      input.disabled = false; send.disabled = false; input.focus();
+    }
+  }
+
+  function msg(role, text){
+    const m=document.createElement('div'); m.className='msg'+(role==='user'?' me':''); m.textContent=text; return m;
+  }
+  function pushUser(text){
+    body.append(msg('user', text));
+    window._ui.gptHistory.push({role:'user', content:text});
+    body.scrollTop = body.scrollHeight;
+  }
+  function pushAssistant(text, used){
+    const wrap=document.createElement('div');
+    wrap.append(msg('assistant', text));
+    if(used && used.length){
+      const s=document.createElement('div'); s.className='sources'; s.textContent='Фрагменты: '+used.join(' • ');
+      wrap.append(s);
+    }
+    body.append(wrap);
+    window._ui.gptHistory.push({role:'assistant', content:text});
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function onSend(){
+    const q=(input.value||'').trim();
+    if(!q) return;
+    input.value='';
+    pushUser(q);
+    askBackend(q);
+  }
+
+  // привязки только при открытии вкладки
+  if(!send.dataset.bound){ send.dataset.bound='1'; send.onclick=onSend; }
+  if(!input.dataset.bound){ input.dataset.bound='1'; input.onkeydown=(e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); onSend(); } }; }
 }
 
-/* ---------- SPA роутинг ---------- */
-function show(id){
-  document.querySelectorAll('section[id^="view-"]').forEach(v=>v.hidden=true);
-  document.getElementById(id).hidden=false;
+/* ===== Визуал: игра вместо панели ===== */
+function bindVisualHandlers(){
+  const diff=document.getElementById('vizDifficulty');
+  if(diff && !diff.dataset.bound){ diff.dataset.bound='1'; diff.addEventListener('input', e=> document.getElementById('vizDiffVal').textContent=e.target.value+'%'); }
+  const from=document.getElementById('btnFromChapter');
+  if(from && !from.dataset.bound){ from.dataset.bound='1'; from.addEventListener('click', ()=>{ const first=(window._current.chapters||[])[0]?.text||''; document.getElementById('vizText').value=first.slice(0,5000); }); }
+  const run=document.getElementById('vizRun');
+  if(run && !run.dataset.bound){ run.dataset.bound='1'; run.addEventListener('click', startVisualGame); }
+  const back=document.getElementById('vizBack');
+  if(back && !back.dataset.bound){ back.dataset.bound='1'; back.addEventListener('click', ()=> switchVisual('panel')); }
+  const dl=document.getElementById('vizDownload');
+  if(dl && !dl.dataset.bound){ dl.dataset.bound='1'; dl.addEventListener('click', downloadGame); }
+  switchVisual('panel'); // при входе в вкладку показываем панель
 }
-function route(){
-  const h=location.hash || '#/home';
-  if(h.startsWith('#/home')){
-    show('view-home');
-  }else if(h.startsWith('#/doc/')){
-    show('view-doc');
-    const tab = h.split('/')[2]||'chunks';
-    if(tab==='chunks') renderChunks();
-    if(tab==='conspect') renderConspect();
-    if(tab==='qa') renderQA();
-    setActiveTab(tab);
-  }else if(h.startsWith('#/quiz')){
-    show('view-quiz');
-  }else{
-    location.hash='#/home';
+
+function resetVisualUI(){
+  const panel = document.getElementById('viz-panel');
+  const game  = document.getElementById('viz-game');
+  if(panel) panel.hidden = false;
+  if(game)  game.hidden  = true;
+
+  const frame=document.getElementById('vizFrame');
+  if(frame){
+    if(window._ui.vizBlobUrl){ URL.revokeObjectURL(window._ui.vizBlobUrl); window._ui.vizBlobUrl=null; }
+    frame.removeAttribute('src'); frame.dataset.html='';
+  }
+  const err=document.getElementById('vizErr'); const loader=document.getElementById('vizLoader');
+  if(err) err.hidden=true; if(loader) loader.hidden=true;
+}
+
+function switchVisual(to){
+  if(to==='game'){
+    document.getElementById('viz-panel').hidden = true;   // прячем конфиг
+    document.getElementById('viz-game').hidden  = false;  // показываем игру НА ЕГО МЕСТЕ
+  }else{ // вернуть конфиг
+    resetVisualUI();
   }
 }
-window.addEventListener('hashchange',route);
-route();
 
-/* клики по документам с главной */
-document.querySelectorAll('.doc').forEach(d=>{
-  d.addEventListener('click',()=>location.hash = d.dataset.route);
-});
+function downloadGame(){
+  const frame=document.getElementById('vizFrame'); const html=frame?.dataset.html||'';
+  if(!html){ alert('Сначала сгенерируйте игру'); return; }
+  const blob=new Blob([html],{type:'text/html'}); const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='game.html'; a.click(); URL.revokeObjectURL(url);
+}
 
-/* клики по табам */
-document.querySelectorAll('#view-doc .tab').forEach(t=>{
-  t.addEventListener('click',()=>location.hash = '#/doc/' + t.dataset.tab);
-});
+async function startVisualGame(){
+  const text=document.getElementById('vizText').value.trim();
+  if(!text){ alert('Вставьте текст'); return; }
+  switchVisual('game'); // сразу заменяем панель на игру
+
+  const loader=document.getElementById('vizLoader');
+  const frame =document.getElementById('vizFrame');
+  const err   =document.getElementById('vizErr');
+  loader.hidden=false; err.hidden=true;
+
+  const payload={
+    text,
+    vibe: document.getElementById('vizVibe').value,
+    palette: document.getElementById('vizPalette').value,
+    game_type: document.getElementById('vizGameType').value,
+    difficulty: Number(document.getElementById('vizDifficulty').value),
+    long_code: !!document.getElementById('vizLong').checked,
+    audio: !!document.getElementById('vizAudio').checked,
+    procedural: !!document.getElementById('vizProcedural').checked
+  };
+
+  try{
+    const r = await fetch('/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const raw = await r.text(); let d=null; try{ d=raw?JSON.parse(raw):null }catch{}
+    if(!r.ok || !d || !d.code){ err.textContent=(d&&(d.error||d.details))||raw||'Ошибка'; err.hidden=false; loader.hidden=true; return; }
+
+    if(window._ui.vizBlobUrl){ URL.revokeObjectURL(window._ui.vizBlobUrl); window._ui.vizBlobUrl=null; }
+    const html=d.code; const blob=new Blob([html],{type:'text/html'}); window._ui.vizBlobUrl=URL.createObjectURL(blob);
+    frame.src=window._ui.vizBlobUrl; frame.dataset.html=html;
+
+    frame.onload=()=>{ loader.hidden=true; try{
+      const meta=frame.contentWindow&&frame.contentWindow.gameMeta;
+      if(!meta){ err.textContent='Проверка результата: window.gameMeta не найден'; err.hidden=false; }
+    }catch(e){ err.textContent='Не удалось прочитать gameMeta: '+e; err.hidden=false; }};
+  }catch(e){
+    err.textContent='Сетевая ошибка: '+e; err.hidden=false; loader.hidden=true;
+  }
+}
+
+/* ===== клики по табам ===== */
+document.querySelectorAll('#view-doc .tab').forEach(t=>{ t.onclick = () => { location.hash = '#/doc/' + t.dataset.tab; }; });
 </script>
 </body>
 </html>
